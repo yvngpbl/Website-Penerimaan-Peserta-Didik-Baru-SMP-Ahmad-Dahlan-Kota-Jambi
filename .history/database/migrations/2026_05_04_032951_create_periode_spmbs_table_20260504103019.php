@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('periode_spmbs', function (Blueprint $table) {
+            $table->id();
+            $table->string('tahun_ajaran', 20)->comment('Contoh: 2026/2027');
+            $table->date('tanggal_buka');
+            $table->date('tanggal_tutup');
+            $table->boolean('status_aktif')->default(false)->comment('Hanya 1 periode yang boleh aktif');
+            $table->integer('kuota_penerimaan')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('periode_spmbs');
+    }
+};
